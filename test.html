@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  </head>
+  <body>
+    <div id="output"></div>
+
+    <div id="vue">
+        <button style="width:100px;" id="button" @click="foo()" v-text="arr.length"></button>
+        <div style="height: 2000px;width:50%;background-color:grey;" @touchmove="onDrag" @touchstart="startDrag"></div>
+    </div>
+
+    <script src="http://cdn.bootcss.com/vue/1.0.24/vue.min.js"></script>
+    <script>
+    var output = document.getElementById("output");
+    Vue.config.debug = true
+    new Vue({
+        el: '#vue',
+        data: {
+            arr: []
+        },
+        methods: {
+            foo:function(){
+                alert((this.arr.length == document.getElementById("button").textContent)?"Right!!!":"Error:(");
+            },
+            startDrag: function(e) {
+                output.innerHTML += "【"
+                this.arr.push("start");
+                output.innerHTML += "】"
+            },
+            onDrag: function(e) {
+                output.innerHTML += "{"
+                this.arr.push("~");
+                output.innerHTML += "}"
+            },
+        },
+    });
+    </script>
+  </body>
+</html>
